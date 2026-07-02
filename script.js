@@ -61,7 +61,7 @@ if (op !== undefined) {
   if (firstValue === null) {
     firstValue = parseFloat(displayValue);
   } else if (operator) {
-    const result = calculate(firstVAlue, operator, parseFloat(displayValue));
+    const result = operate(firstValue,parseFloat(displayValue), operator );
     displayValue = String(result);
     firstValue = result;
     updateDisplay();
@@ -71,12 +71,24 @@ if (op !== undefined) {
   return;
 }
 
-if (action === 'AC  ') {
+if (action === 'AC') {
   displayValue = '0';
   firstValue = null;
   operator = null;
   waitingForSecondValue = false;
   updateDisplay();
+  return;
 }  
+if (action === '=') {
+  if (firstValue !== null && operator) {
+    const result = operate(firstValue, parseFloat(displayValue), operator);
+    displayValue = String(result);
+    firstValue = null;
+    operator = null;
+    waitingForSecondValue = false;
+    updateDisplay();
+    return;
+  }
+}
 
 });
