@@ -34,3 +34,11 @@ function updateDisplay() {
   display.value = displayValue;
 }
 
+buttons.addEventListener('click', (event) => {
+  const target = event.target.closest('button');
+  if (!target) return;
+
+  const value = target.dataset.value;
+  const op = target.dataset.operator;
+  const action = target.dataset.action;
+
