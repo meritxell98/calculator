@@ -4,40 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <div id="calculator">
-  <input type="text" id="display" readonly>
-  <div id="buttons">
-        <ul>
-            <li><button data-action="AC" class="button" type="button">AC</button></li>
-            <li><button data-operator="/" class="button" type="button">/</button></li>
-        </ul>
-        <ul>
-            <li><button data-value="7" class="number" type="button">7</button></li>
-            <li><button data-value="8" class="number" type="button">8</button></li>
-            <li><button data-value="9" class="number" type="button">9</button></li>
-            <li><button data-operator="*" class="button" type="button">/</button></li>
-        </ul>
-        <ul>
-            <li><button data-value="4" class="number" type="button">4</button></li>
-            <li><button data-value="5" class="number" type="button">5</button></li>
-            <li><button data-value="6" class="number" type="button">6</button></li>
-            <li><button data-operator="-" class="button" type="button">*</button></li>
-        </ul>
+<div id="calculator">
 
-        <ul>
-            <li><button data-value="1" class="number" type="button">1</button></li>
-            <li><button data-value="2" class="number" type="button">2</button></li>
-            <li><button data-value="3" class="number" type="button">3</button></li>
-            <li><button data-operator="+" class="button" type="button">+</button></li>
-        </ul>
-        <ul>
-            <li><button data-value="0" class="number" type="button">0</button></li>
-            <li><button data-value="." class="button" type="button">.</button></li>
-            <li><button data-action="=" class="button" type="button">=</button></li>
-        </ul>
-  </div>
+    <header>
+        <span>calc<span class="dot">()</span></span>
+    </header>
+
+    <main class="calc">
+        <section class="screen" aria-label="pantalla de la calculadora">
+            <p class="history" id="history" aria-live="off">&nbsp;</p>
+            <output class="display" id="display" aria-live="polite">0</output>
+        </section>
+        
+        <div id="buttons">
+                <ul>
+                    <li><button data-action="AC" class="button" type="button">AC</button></li>
+                    <li><button data-operator="/" class="button" type="button">/</button></li>
+                </ul>
+                <ul>
+                    <li><button data-value="7" class="number" type="button">7</button></li>
+                    <li><button data-value="8" class="number" type="button">8</button></li>
+                    <li><button data-value="9" class="number" type="button">9</button></li>
+                    <li><button data-operator="*" class="button" type="button">/</button></li>
+                </ul>
+                <ul>
+                    <li><button data-value="4" class="number" type="button">4</button></li>
+                    <li><button data-value="5" class="number" type="button">5</button></li>
+                    <li><button data-value="6" class="number" type="button">6</button></li>
+                    <li><button data-operator="-" class="button" type="button">*</button></li>
+                </ul>
+
+                <ul>
+                    <li><button data-value="1" class="number" type="button">1</button></li>
+                    <li><button data-value="2" class="number" type="button">2</button></li>
+                    <li><button data-value="3" class="number" type="button">3</button></li>
+                    <li><button data-operator="+" class="button" type="button">+</button></li>
+                </ul>
+                <ul>
+                    <li><button data-value="0" class="number" type="button">0</button></li>
+                    <li><button data-value="." class="button" type="button">.</button></li>
+                    <li><button data-action="=" class="button" type="button">=</button></li>
+                </ul>
+        </div>
+    </main>
 </div>
 <script src="script.js"></script>
 
