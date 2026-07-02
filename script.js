@@ -34,11 +34,26 @@ function updateDisplay() {
   display.value = displayValue;
 }
 
-buttons.addEventListener('click', (event) => {
-  const target = event.target.closest('button');
-  if (!target) return;
+buttons.addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
 
-  const value = target.dataset.value;
-  const op = target.dataset.operator;
-  const action = target.dataset.action;
+  const value = btn.dataset.value;
+  const op = btn.dataset.operator;
+  const action = btn.dataset.action;
 
+  if (value !== undefined) {
+    if (waitingForSecondValue) {
+      displayValue = value === '.' ? '0.' : value;
+      waitingForSecondValue = false;
+    } else if (value === '.') {
+      if (!displayValue.includes('.')) {
+        displayValue += '.';
+      }
+    } else {
+      displayValue = displayValue === '0' ? value : displayValue + value;
+    }
+    updateDisplay();
+    return;
+}
+});
