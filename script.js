@@ -1,3 +1,8 @@
+var displayValue = '0';
+var firstValue = null;
+var secondValue = null;
+var operator = "";
+
 const display =document.getElementById('display');
 const buttons = document.getElementById('buttons');
 
