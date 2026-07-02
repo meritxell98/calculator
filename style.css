@@ -5,6 +5,9 @@
     --muted: #6e7681;
     --panel: #161b22;
     --op: #3fb68f;
+    --muted: #6e7681;
+    --panel: #161b22;
+    --panel-2: #1c2129;
 }
 
 * { box-sizing: border-box; }
@@ -51,4 +54,40 @@ main.calc{
     border: 1px solid #262c35;
     display: flex;
     flex-direction: column;
+}
+
+.screen{
+    background: var(--panel-2);
+    border-radius: 8px;
+    padding: 18px 16px 14px;
+    margin-bottom: 14px;
+    border: 1px solid #262c35;
+    min-height: 90px;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow:hidden;
+}
+
+.history{
+    color: var(--muted);
+    font-size: 13px;
+    min-height: 18px;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 6px;
+}
+
+output.display{
+    display: block;
+    text-align: right;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    transition: color 0.15s ease;
 }
