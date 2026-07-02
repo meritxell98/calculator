@@ -19,3 +19,18 @@ const divide = (a, b) => {
   return a / b;
 };
 
+const operations = {
+  '+': add,
+  '-': subtract,
+  '*': multiply,
+  '/': divide,
+};
+
+function operate (number1, number2, operator) {
+    return operations[operator](number1, number2);
+}
+
+function updateDisplay() {
+  display.value = displayValue;
+}
+
