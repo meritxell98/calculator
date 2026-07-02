@@ -70,5 +70,13 @@ if (op !== undefined) {
   waitingForSecondValue = true;
   return;
 }
-  
+
+if (action === 'AC  ') {
+  displayValue = '0';
+  firstValue = null;
+  operator = null;
+  waitingForSecondValue = false;
+  updateDisplay();
+}  
+
 });
