@@ -56,4 +56,19 @@ buttons.addEventListener('click', (e) => {
     updateDisplay();
     return;
 }
+
+if (op !== undefined) {
+  if (firstValue === null) {
+    firstValue = parseFloat(displayValue);
+  } else if (operator) {
+    const result = calculate(firstVAlue, operator, parseFloat(displayValue));
+    displayValue = String(result);
+    firstValue = result;
+    updateDisplay();
+  }
+  operator = op;
+  waitingForSecondValue = true;
+  return;
+}
+  
 });
