@@ -6,8 +6,10 @@
     --panel: #161b22;
     --op: #3fb68f;
     --muted: #6e7681;
-    --panel: #161b22;
     --panel-2: #1c2129;
+    --key: #21262d;
+    --key-hover: #1c2129;
+    --op-active: #2a3f38;
 }
 
 * { box-sizing: border-box; }
@@ -90,4 +92,87 @@ output.display{
     overflow: hidden;
     text-overflow: clip;
     transition: color 0.15s ease;
+}
+
+.keypad{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.row{
+    display: flex;
+    gap: 8px;
+}
+
+.row.with-equals{
+    align-items: stretch;
+}
+
+.num-block{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 3; 
+}
+
+.num-block .row{
+    flex: 1;
+}
+
+button{
+    font-family: var(--font-mono);
+    font-size: 17px;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 0;
+    cursor: pointer;
+    background: var(--key);
+    color: var(--text);
+    transition: background 0.12s ease, transform 0.05s ease;
+    flex: 1; 
+}
+
+button:hover{ background: var(--key-hover); }
+button:active{ transform: scale(0.96); }
+
+button.op{
+    background: transparent;
+    color: var(--op);
+    border: 1px solid #2a3f38;
+    font-weight: 600;
+}
+
+button.op:hover{ background: rgba(63,182,143,0.1); }
+button.op.active{
+    background: var(--op);
+    color: #06251b;
+}
+
+button.equals{
+    background: var(--op);
+    color: #06251b;
+    font-weight: 700;
+    flex: 1;
+}
+
+button.equals:hover{ background: var(--op-active); }
+
+button.clear, button.back{
+    color: var(--danger);
+    background: transparent;
+    border: 1px solid #3a2422;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+}
+
+button.clear:hover, button.back:hover{ background: rgba(229,83,75,0.1); }
+
+.row.bottom-row button[data-num="0"]{
+    flex: 2;
+}
+
+button:focus-visible{
+    outline: 2px solid var(--op);
+    outline-offset: 2px;
 }
