@@ -149,6 +149,54 @@ function applyEquals() {
   }
 }
 
+function handleKeyboardInput(event) {
+  const key = event.key || '';
+  const code = event.code || '';
+  const keyMap = {
+    NumpadEnter: 'Enter',
+    NumpadAdd: '+',
+    NumpadSubtract: '-',
+    NumpadMultiply: '*',
+    NumpadDivide: '/',
+    NumpadDecimal: '.',
+  };
+
+  let normalizedKey = key;
+
+  if (keyMap[code]) {
+    normalizedKey = keyMap[code];
+  } else if (code.startsWith('Digit')) {
+    normalizedKey = code.replace('Digit', '');
+  } else if (code.startsWith('Numpad')) {
+    normalizedKey = code.replace('Numpad', '');
+  }
+
+  switch (normalizedKey) {
+    case 'Enter':
+      event.preventDefault();
+      applyEquals();
+      updateDisplay();
+      return;
+    case 'Escape':
+      event.preventDefault();
+      resetCalculator();
+      return;
+    default:
+      if (/^[0-9.]$/.test(normalizedKey)) {
+        event.preventDefault();
+        enterDigit(normalizedKey);
+        updateDisplay();
+        return;
+      }
+
+      if (['+', '-', '*', '/'].includes(normalizedKey)) {
+        event.preventDefault();
+        setOperator(normalizedKey);
+        updateDisplay();
+      }
+  }
+}
+
 buttons.addEventListener('click', (e) => {
   const btn = e.target.closest('button');
   if (!btn) return;
@@ -180,4 +228,5 @@ buttons.addEventListener('click', (e) => {
   }
 });
 
+window.addEventListener('keydown', handleKeyboardInput);
 window.addEventListener('load', updateDisplay);
