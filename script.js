@@ -1,10 +1,10 @@
-const display =document.getElementById('display');
+const display = document.getElementById('display');
 const buttons = document.getElementById('buttons');
 
-var displayValue = '0';
-var firstValue = null;
-var operator = null;
-var waitingForSecondValue = false;
+let displayValue = '0';
+let firstValue = null;
+let operator = null;
+let waitingForSecondValue = false;
 
 const add = (a, b) => a + b;
 
@@ -26,12 +26,53 @@ const operations = {
   '/': divide,
 };
 
-function operate (number1, number2, operator) {
-    return operations[operator](number1, number2);
+function formatDisplay(value) {
+  if (value === 'Error') return value;
+
+  const num = Number(value);
+
+  const formatted = parseFloat(num.toFixed(10)).toString();
+
+  if (formatted.length > 12 && !formatted.includes('e')) {
+    return num.toExponential(8);
+  }
+
+  return formatted;
+}
+
+function operate(number1, number2, operator) {
+  if (!operations[operator]) {
+    return 'Error';
+  }
+  return operations[operator](number1, number2);
 }
 
 function updateDisplay() {
-  display.value = displayValue;
+  display.value = formatDisplay(displayValue);
+}
+
+function handleError() {
+  displayValue = 'Error';
+  firstValue = null;
+  operator = null;
+  waitingForSecondValue = false;
+  updateDisplay();
+}
+
+function calculate(num1, num2, op) {
+  const result = operate(num1, num2, op);
+
+  if (result === 'Error') {
+    handleError();
+    return null;
+  }
+
+  if (!Number.isFinite(result)) {
+    handleError();
+    return null;
+  }
+
+  return result;
 }
 
 buttons.addEventListener('click', (e) => {
@@ -55,40 +96,49 @@ buttons.addEventListener('click', (e) => {
     }
     updateDisplay();
     return;
-}
-
-if (op !== undefined) {
-  if (firstValue === null) {
-    firstValue = parseFloat(displayValue);
-  } else if (operator) {
-    const result = operate(firstValue,parseFloat(displayValue), operator );
-    displayValue = String(result);
-    firstValue = result;
-    updateDisplay();
   }
-  operator = op;
-  waitingForSecondValue = true;
-  return;
-}
 
-if (action === 'AC') {
-  displayValue = '0';
-  firstValue = null;
-  operator = null;
-  waitingForSecondValue = false;
-  updateDisplay();
-  return;
-}  
-if (action === '=') {
-  if (firstValue !== null && operator) {
-    const result = operate(firstValue, parseFloat(displayValue), operator);
-    displayValue = String(result);
+  if (op !== undefined) {
+    if (firstValue === null) {
+      firstValue = parseFloat(displayValue);
+    } else if (operator) {
+      const result = calculate(firstValue, parseFloat(displayValue), operator);
+      if (result === null) {
+        return;
+      }
+      displayValue = String(result);
+      firstValue = result;
+      updateDisplay();
+    }
+    operator = op;
+    waitingForSecondValue = true;
+    return;
+  }
+
+  if (action === 'AC') {
+    displayValue = '0';
     firstValue = null;
     operator = null;
     waitingForSecondValue = false;
     updateDisplay();
     return;
   }
-}
+  if (action === '=') {
+    if (firstValue !== null && operator) {
+      const result = calculate(firstValue, parseFloat(displayValue), operator);
+      if (result === null) {
+        return;
+      }
+      displayValue = String(result);
+      firstValue = null;
+      operator = null;
+      waitingForSecondValue = false;
+      updateDisplay();
+      return;
+    }
+  }
+});
 
+window.addEventListener('load', () => {
+  updateDisplay();
 });

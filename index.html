@@ -4,40 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <div id="calculator">
-  <input type="text" id="display" readonly>
-  <div id="buttons">
-        <ul>
-            <li><button data-action="AC" class="button" type="button">AC</button></li>
-            <li><button data-operator="/" class="button" type="button">/</button></li>
-        </ul>
-        <ul>
-            <li><button data-value="7" class="number" type="button">7</button></li>
-            <li><button data-value="8" class="number" type="button">8</button></li>
-            <li><button data-value="9" class="number" type="button">9</button></li>
-            <li><button data-operator="*" class="button" type="button">/</button></li>
-        </ul>
-        <ul>
-            <li><button data-value="4" class="number" type="button">4</button></li>
-            <li><button data-value="5" class="number" type="button">5</button></li>
-            <li><button data-value="6" class="number" type="button">6</button></li>
-            <li><button data-operator="-" class="button" type="button">*</button></li>
-        </ul>
+<div id="calculator">
 
-        <ul>
-            <li><button data-value="1" class="number" type="button">1</button></li>
-            <li><button data-value="2" class="number" type="button">2</button></li>
-            <li><button data-value="3" class="number" type="button">3</button></li>
-            <li><button data-operator="+" class="button" type="button">+</button></li>
-        </ul>
-        <ul>
-            <li><button data-value="0" class="number" type="button">0</button></li>
-            <li><button data-value="." class="button" type="button">.</button></li>
-            <li><button data-action="=" class="button" type="button">=</button></li>
-        </ul>
-  </div>
+    <header>
+        <span>calc<span class="dot">()</span></span>
+    </header>
+
+    <main class="calc">
+        <section class="screen" aria-label="calculator screen">
+            <output class="display" id="display" aria-live="polite">0</output>
+        </section>
+
+        <section class="keypad" id="buttons" aria-label="calculator keypad">
+            <div class="row">
+                <button class="clear" data-action="AC">AC</button>
+                <button class="op" data-operator="/">/</button>
+                <button class="op" data-operator="*">×</button>
+            </div>
+
+            <div class="row">
+                <button data-value="7">7</button>
+                <button data-value="8">8</button>
+                <button data-value="9">9</button>
+                <button class="op" data-operator="-" aria-label="restar">−</button>
+            </div>
+
+            <div class="row">
+                <button data-value="4">4</button>
+                <button data-value="5">5</button>
+                <button data-value="6">6</button>
+                <button class="op" data-operator="+" aria-label="sumar">+</button>
+            </div>
+
+            <div class="row with-equals">
+                <div class="num-block">
+                <div class="row">
+                    <button data-value="1">1</button>
+                    <button data-value="2">2</button>
+                    <button data-value="3">3</button>
+                </div>
+                <div class="row bottom-row">
+                    <button data-value="0">0</button>
+                    <button data-value=".">.</button>
+                </div>
+                </div>
+                <button class="equals" data-action="=">=</button>
+            </div>
+
+        </section>
+    </main>
 </div>
 <script src="script.js"></script>
 
