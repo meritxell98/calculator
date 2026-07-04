@@ -31,7 +31,7 @@ function formatDisplay(value) {
 
   const num = Number(value);
 
-  const formatted = parseFloat(num.toFixed(10)).toString();
+  const formatted = parseFloat(num.toFixed(3)).toString();
 
   if (formatted.length > 12 && !formatted.includes('e')) {
     return num.toExponential(8);
